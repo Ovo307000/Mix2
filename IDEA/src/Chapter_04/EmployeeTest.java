@@ -1,10 +1,8 @@
 package Chapter_04;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-
 public class EmployeeTest{
-    public void run(){
+    public void setEmployee(){
         Employee[] employee = new Employee[5];
 
         employee[0] = new Employee("zhangSan", 7834, 2022, 12,2);
@@ -12,18 +10,6 @@ public class EmployeeTest{
         employee[2] = new Employee("wangWU",   2478, 2022, 12,2);
         employee[3] = new Employee("zhaoLiu",  5347, 2022, 12,2);
         employee[4] = new Employee("liuQi",    6345, 2022, 12,2);
-
-        Employee liErMaZi = new Employee();
-
-        liErMaZi.setN("LiErMaZi");
-        liErMaZi.setS(2000);
-        liErMaZi.setHireDay(LocalDate.of(2000,2,3));
-        liErMaZi.printInfo();
-        Employee.id++;
-
-        Employee gouDan = Employee.getFullExample("gouDan", 3000, 12, 8, 6);
-        gouDan.printInfo();
-
 
         for (Employee e : employee){
             System.out.println("\u001b[38;2;255;255;0m");
@@ -40,7 +26,20 @@ public class EmployeeTest{
         System.out.println(Employee.id);
         System.out.println("Done");
     }
+    public void staticMethodTest(){
+        Employee gouDan = Employee.getFullExample("gouDan", 3000, 12, 8, 6);
+        gouDan.printInfo();
 
+        Employee liErMaZi = new Employee();
+        liErMaZi.setN("LiErMaZi");
+        liErMaZi.setS(2000);
+        liErMaZi.setHireDay(LocalDate.of(2000,2,3));
+        liErMaZi.printInfo();
+    }
+    public void run(){
+        setEmployee();
+        staticMethodTest();
+    }
     public static void main(String[] args) {
         new EmployeeTest().run();
     }
@@ -51,10 +50,8 @@ class Employee {
     private int s;
     private LocalDate hireDay;
     static public int id = 0;
-
     public Employee() {
     }
-
     public Employee(String name, int salary, int year, int month, int day) {
         this.n = name;
         this.s = salary;
