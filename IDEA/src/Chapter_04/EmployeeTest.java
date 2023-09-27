@@ -43,7 +43,13 @@ public class EmployeeTest{
         staticMethodTest();
         setEmployee();
 
+        printEmployeeIdCount();
         completionPrompt();
+    }
+
+    public void printEmployeeIdCount()
+    {
+        System.out.println("Total number of employees = " + new Employee().getId());
     }
     public static void main(String[] args) {
         new EmployeeTest().run();
