@@ -2,6 +2,9 @@ package Chapter_04;
 
 import java.time.LocalDate;
 public class EmployeeTest{
+    public static Employee carftEmployee() {
+        return new Employee();
+    }
     public void setEmployee(){
         Employee[] employee = new Employee[5];
 
@@ -22,23 +25,26 @@ public class EmployeeTest{
             System.out.println("\u001b[0m");
             Employee.id++;
         }
-
-        System.out.println(Employee.id);
-        System.out.println("Done");
     }
     public void staticMethodTest(){
-        Employee gouDan = Employee.getFullExample("gouDan", 3000, 12, 8, 6);
+        Employee gouDan = Employee.getFullExample("", 3000, 12, 8, 6);
         gouDan.printInfo();
 
         Employee liErMaZi = new Employee();
-        liErMaZi.setN("LiErMaZi");
-        liErMaZi.setS(2000);
+        liErMaZi.setName("LiErMaZi");
+        liErMaZi.setSalary(2000);
         liErMaZi.setHireDay(LocalDate.of(2000,2,3));
         liErMaZi.printInfo();
     }
+
+    public void completionPrompt() {
+        System.out.println("Done");
+    }
     public void run(){
-        setEmployee();
         staticMethodTest();
+        setEmployee();
+
+        completionPrompt();
     }
     public static void main(String[] args) {
         new EmployeeTest().run();
@@ -46,44 +52,51 @@ public class EmployeeTest{
 }
 
 class Employee {
-    private String n;
-    private int s;
+    private String name;
+    private int salary;
     private LocalDate hireDay;
-    static public int id = 0;
+    private static int id = 0;
     public Employee() {
+        Employee.id += 1;
     }
-    public Employee(String name, int salary, int year, int month, int day) {
-        this.n = name;
-        this.s = salary;
+    public Employee(String n, int s, int year, int month, int day) {
+        if (n == null) {
+            throw new IllegalArgumentException("Name can't be null");
+        }
+
+        Employee.id += 1;
+
+        this.name = n;
+        this.salary = s;
         this.hireDay = LocalDate.of(year, month, day);
     }
 
     public void printInfo() {
-        System.out.println("Name : " + this.n + " ");
-        System.out.println("Salary : " + this.s + " ");
+        System.out.println("Name : " + this.name + " ");
+        System.out.println("Salary : " + this.salary + " ");
         System.out.println("Hire day : " + this.hireDay + " ");
     }
 
     // Increase salary by percentage
     public void raiseSalary(int byPercent) {
-        int raise = this.s * byPercent / 100;
-        this.s += raise;
+        int raise = this.salary * byPercent / 100;
+        this.salary += raise;
     }
 
-    public String getN() {
-        return n;
+    public String getName() {
+        return name;
     }
 
-    public void setN(String n) {
-        this.n = n;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getS() {
-        return s;
+    public int getSalary() {
+        return salary;
     }
 
-    public void setS(int s) {
-        this.s = s;
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     public LocalDate getHireDay() {
@@ -94,11 +107,20 @@ class Employee {
         this.hireDay = hireDay;
     }
 
+    public int getId() {
+        return Employee.id;
+    }
+
     public static Employee getNullExample() {
-        return new Employee();
+        Employee employee = new Employee();
+        Employee.id += 1;
+        return  employee;
     }
 
     public static Employee getFullExample(String name, int salary, int year, int month, int day) {
-        return new Employee(name, salary, year, month, day);
+        Employee employee = new Employee(name, salary, year, month, day);
+        Employee.id += 1;
+
+        return employee;
     }
 }
