@@ -23,7 +23,6 @@ public class EmployeeTest{
             e.raiseSalary(100);
             e.printInfo();
             System.out.println("\u001b[0m");
-            Employee.id++;
         }
     }
     public void staticMethodTest(){
