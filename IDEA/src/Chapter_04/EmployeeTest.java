@@ -16,17 +16,18 @@ public class EmployeeTest{
 
         for (Employee e : employee){
             System.out.println("\u001b[38;2;255;255;0m");
-            System.out.println();
+            System.out.println("Before: vvv");
             e.printInfo();
 
             System.out.println("\u001b[38;2;0;255;0m");
             e.raiseSalary(100);
+            System.out.println("After: vvv");
             e.printInfo();
             System.out.println("\u001b[0m");
         }
     }
     public void staticMethodTest(){
-        Employee gouDan = Employee.getFullExample("", 3000, 12, 8, 6);
+        Employee gouDan = Employee.getFullExample("Goudan", 3000, 2012, 8, 6);
         gouDan.printInfo();
 
         Employee liErMaZi = new Employee();
@@ -117,15 +118,10 @@ class Employee {
     }
 
     public static Employee getNullExample() {
-        Employee employee = new Employee();
-        Employee.id += 1;
-        return  employee;
+        return new Employee();
     }
 
     public static Employee getFullExample(String name, int salary, int year, int month, int day) {
-        Employee employee = new Employee(name, salary, year, month, day);
-        Employee.id += 1;
-
-        return employee;
+        return new Employee(name, salary, year, month, day);
     }
 }
